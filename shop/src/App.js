@@ -4,9 +4,10 @@ import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import { useState } from "react";
 import shoedata from "./data.js";
 
+
 function App() {
 
-  let [shoes,setShoes] = useState();
+  let [shoes,setShoes] = useState(shoedata);
 
   return (
     <div className="App">
@@ -21,30 +22,40 @@ function App() {
         </Container>
       </Navbar>
       <br />
-      <div class="main-bg"></div>
+      <div className="main-bg"></div>
       <br />
       <div className="container">
         <div className="row">
-          <div className="col-md-4">
-            <img className = "front-shoes" src={process.env.PUBLIC_URL + '/images/shoes1.jpg'} /> 
-            <h4>Product No.1</h4>
-            <p>Explanation</p>
-          </div>
+          {
+            <FrontShoes shoedata={shoedata}/>
+          }
+
           <div className="col-md-4">
             <img className = "front-shoes" src={process.env.PUBLIC_URL + '/images/shoes2.jpg'} /> 
-            <h4>Product No.2</h4>
+            <h4>{shoedata[1].title}</h4>
             <p>Explanation</p>
           </div>
           <div className="col-md-4">
             <img className = "front-shoes" src={process.env.PUBLIC_URL + '/images/shoes3.jpg'} /> 
-            <h4>Product No.3</h4>
+            <h4>{shoedata[2].title}</h4>
             <p>Explanation</p>
           </div>
         </div>
       </div>
 
     </div>
+    
   );
+
+  function FrontShoes(props){
+    return(
+      <div className="col-md-4">
+        <img className = "front-shoes" src={process.env.PUBLIC_URL + './images/shoes1.jpg'} /> 
+        <h4>{props.shoedata[0].title}</h4>
+        <p>Explanation</p>
+      </div>
+    );
+  };
 }
 
 export default App;
