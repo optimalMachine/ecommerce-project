@@ -3,7 +3,7 @@
 }
 
 .main-bg{
-  background-image: url("https://github.com/optimalMachine/ecommerce-project/blob/main/shop/public/images/bg.png?raw=true");
+  background-image: url('main-image.png');
   height: 300px;
   background-size: cover;
   background-position: center;

@@ -22,8 +22,8 @@ function App() {
         </Container>
       </Navbar>
       <br />
-      <div className="main-bg"></div>
-      <br />
+      <div className="main-bg">
+      </div>
       <div className="container">
         <div className="row">
           {
