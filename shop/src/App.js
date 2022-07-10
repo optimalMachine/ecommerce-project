@@ -1,16 +1,16 @@
 import './App.css';
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import { Routes, Route, Link, useNavigate, Outlet, useParams } from 'react-router-dom'
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import { useState } from "react";
 import shoedata from "./data.js";
 import Detail from "./routes/detail.js";
-
 
 function App() {
 
   let navigate = useNavigate();
   let [shoes,setShoes] = useState(shoedata);
   let [shoeNumber, setShoeNumber] = useState(0);
+  let [modalOn, setModalOn] = useState(false);
 
   return (
     <div className="App">
@@ -20,7 +20,6 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/about')}} >About</Nav.Link>
-
             <Nav.Link onClick={()=>{navigate('/detail')}} >Detail</Nav.Link>
           </Nav>
         </Container>
@@ -36,34 +35,38 @@ function App() {
                 {
                   shoes.map((data,i)=>{
                     return(
-                      <Card i={i} shoedata={shoedata}/>
+                      <Card onClick={()=>{
+                        setModalOn(!modalOn);
+                      }} i={i} shoedata={shoedata}/>
                     )
                   })
+                  modalOn == true ? <Detail shoeData={shoedata}/> : null;
                 }
               </div>
             </div>
           </>
         } />
-        <Route path="/detail" element={ <Detail productImage={"./images/shoes1.jpg"}/> } />
+        <Route path="/detail/:id" element={ <Detail shoeData={shoedata} />} /> 
         <Route path="/about" element={ <About /> }>
           <Route path="member" element={ <div>Member list</div> } />
           <Route path="location" element={ <div>Where we are</div> } />
         </Route>
-
-
-        <Route path="*" element={ 
-          <>
-            <h3>404</h3>
-            <h3>Page doesn't exist.<i class="bi bi-bell-slash-fill"></i></h3>
-            <a style={{cursor:'pointer'}} onClick={()=>{navigate('/')}}><i class="bi bi-house-door-fill"></i> Go back to home</a>
-          </>
-        } />
-
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
 
     </div>
     
   );
+
+  function PageNotFound(){
+    return(
+      <>
+        <h3>404</h3>
+        <h3>Page doesn't exist.<i class="bi bi-bell-slash-fill"></i></h3>
+        <a style={{cursor:'pointer'}} onClick={()=>{navigate('/')}}><i class="bi bi-house-door-fill"></i> Go back to home</a>
+      </>
+    )
+  }
 
   function About(){
     return (
