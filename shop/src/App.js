@@ -18,10 +18,10 @@ function App() {
         <Container>
           <Navbar.Brand href="#home"><span><i class="bi bi-shop"></i></span> ShoeShop</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#Cart">Cart</Nav.Link>
-            <Link to="/">홈</Link>
-            <Link to="detail">상세페이지</Link>
+            <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{navigate('/about')}} >About</Nav.Link>
+
+            <Nav.Link onClick={()=>{navigate('/detail')}} >Detail</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -45,11 +45,17 @@ function App() {
           </>
         } />
         <Route path="/detail" element={ <Detail productImage={"./images/shoes1.jpg"}/> } />
-        <Route path="/about" element={ <div>어바웃페이지임</div> } />
+        <Route path="/about" element={ <About /> }>
+          <Route path="member" element={ <div>Member list</div> } />
+          <Route path="location" element={ <div>Where we are</div> } />
+        </Route>
+
+
         <Route path="*" element={ 
           <>
-            <h3>Page doesn't exist. <i class="bi bi-bell-slash-fill"></i></h3>
-            <a href="/"><i class="bi bi-house-door-fill"></i> Go back to home</a>
+            <h3>404</h3>
+            <h3>Page doesn't exist.<i class="bi bi-bell-slash-fill"></i></h3>
+            <a style={{cursor:'pointer'}} onClick={()=>{navigate('/')}}><i class="bi bi-house-door-fill"></i> Go back to home</a>
           </>
         } />
 
@@ -58,6 +64,18 @@ function App() {
     </div>
     
   );
+
+  function About(){
+    return (
+      <>
+        <div className="aboutus">
+          <h1>About Us</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pretium tortor et mi placerat, ut feugiat tellus rutrum. Nam eleifend congue accumsan. Vivamus sit amet nunc quis massa feugiat cursus. Nunc at dapibus felis, et pulvinar nibh. Integer tempor dolor a iaculis gravida. Ut vel pharetra ipsum. Maecenas bibendum ac lacus sed commodo. Nulla risus massa, imperdiet et ligula scelerisque, cursus lobortis augue. Phasellus finibus congue elit id dictum.</p>
+        </div>
+        <Outlet></Outlet>
+      </>
+    )
+  }
 
   function Card(props){
     return(
