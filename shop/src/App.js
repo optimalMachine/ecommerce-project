@@ -40,7 +40,6 @@ function App() {
                       }} i={i} shoedata={shoedata}/>
                     )
                   })
-                  modalOn == true ? <Detail shoeData={shoedata}/> : null;
                 }
               </div>
             </div>
