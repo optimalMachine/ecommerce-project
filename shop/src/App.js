@@ -35,7 +35,8 @@ function App() {
                 {
                   shoes.map((data,i)=>{
                     return(
-                      <Card onClick={()=>{
+                      <Card mouseOver={()=>{
+                        <Detail />
                         setModalOn(!modalOn);
                       }} i={i} shoedata={shoedata}/>
                     )

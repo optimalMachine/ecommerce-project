@@ -31,6 +31,7 @@ function Detail(props){
                     <p>{findProduct.content}</p>
                     <p>{findProduct.price} Won</p>
                     <button className="btn btn-danger">Order Now</button> 
+
                 </div>
             </div>
         </div> 
