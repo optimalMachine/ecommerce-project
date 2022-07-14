@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from 'styled-components'
 
@@ -14,14 +15,24 @@ let Box = styled.div`
 `
 
 function Detail(props){
+    let [alert, setAlert] = useState(true);
+    useEffect(()=>{
+        setTimeout(()=>{
+            setAlert(false);
+        },2000);
+    },[])
     
     let {id} = useParams();
     let findProduct = props.shoeData.find((x)=>{
-        console.log (x.id==id)
-        return x.id == id
+    
+        return x.id == id;
     })
+
     return(
         <div className="container">
+            {
+                alert == true ? <div className="alert alert-warning">2초내 구입시 할인</div> : null 
+            }
             <div className="row">
                 <div className="col-md-6">
                     <img src={ process.env.PUBLIC_URL + '/images/shoes'+ (Number(id) + 1)+'.jpg' } width="100%" />
